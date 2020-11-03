@@ -1,6 +1,6 @@
 # IGBot
 Instagram bot to follow a fixed amount of followers from an account.
-
+![IGBot](https://149440935.v2.pressablecdn.com/wp-content/uploads/2019/12/k3eTuMQY.jpg)
 
 ### How can you use it?
 1. Set up chromedriver
