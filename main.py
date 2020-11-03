@@ -1,14 +1,15 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
-from secrets import username, pw, target
+from secrets import username, pw, target, target_number
 
 
 class IGBot:
-    def __init__(self, username, pw, target):
+    def __init__(self, username, pw, target, target_number):
         self.base_url = "https://instagram.com"
         self.username = username
         self.target = target
+        self.target_number = target_number
         self.target_url = self.base_url + "/" + self.target
         self.driver = webdriver.Chrome()
         self.driver.get(self.base_url)
@@ -28,16 +29,23 @@ class IGBot:
         sleep(2)
         counter = 0
 
-        while(counter<50):
+        while(counter < target_number):
 
             try:
-                follow = self.driver.find_element_by_xpath("//button[@class='sqdOP  L3NKy   y3zKF     ']").click()
+                follow = self.driver.find_element_by_xpath("//button[@class='sqdOP  L3NKy   y3zKF     ']")
+                follow.click()
+                sleep(3)
+                next_follow = self.driver.find_element_by_xpath("//button[@class='sqdOP  L3NKy   y3zKF     ']")
+                while (follow==next_follow):
+                    follow.click()
+                    sleep(5)
+                    follow = self.driver.find_element_by_xpath("//button[@class='sqdOP  L3NKy   y3zKF     ']")
+                    next_follow = self.driver.find_element_by_xpath("//button[@class='sqdOP  L3NKy   y3zKF     ']")
                 counter += 1
                 print("Cantidad de seguidos: " + str(counter))
             except NoSuchElementException:
                 self.scroll_down()
-            
-
+           
 
     def scroll_down(self):
         last_element = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div[2]/ul/div/li[last()]")
@@ -45,7 +53,7 @@ class IGBot:
     
         
 
-my_bot = IGBot(username, pw, target)
+my_bot = IGBot(username, pw, target, target_number)
 my_bot.follow_followers()
 
 
