@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
-from secrets import pw
+from secrets import username, pw, target
 
 
 class IGBot:
@@ -45,7 +45,7 @@ class IGBot:
     
         
 
-my_bot = IGBot('bautirueda', pw, "rufinas_swimwear")
+my_bot = IGBot(username, pw, target)
 my_bot.follow_followers()
 
 
